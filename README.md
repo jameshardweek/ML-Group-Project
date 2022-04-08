@@ -1,1 +1,1 @@
-# ML-Group-Project
+# ML Group Project: Good News Classifier
