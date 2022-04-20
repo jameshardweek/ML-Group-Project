@@ -2,3 +2,4 @@ report*
 ijcai*
 !*.tex
 .DS_Store
+.gitignore
