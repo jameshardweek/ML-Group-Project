@@ -19,7 +19,8 @@ def process_text(text):
 for article in headlines_json['articles']:
     # headline = article['title'].lower()
     # headline = ''.join([x for x in headline if x.isalpha() or x == ' '])
-    articles[article['title']] = article['url']
+    title = ''.join(article['title'].split('-')[:-1])
+    articles[title] = article['url']
 
 for title, url in articles.items():
     st.write(f"[{title}]({url})")
