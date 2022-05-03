@@ -1,8 +1,10 @@
-import streamlit as st
-import requests
-from datetime import date
 import json
+from datetime import date
+
 import iso3166
+import requests
+import streamlit as st
+from joblib import load
 
 API_KEY = "708ad74a333343d78c544425e5cb85cd"
 DATE = date.today().strftime("%Y-%m-%d")
@@ -31,5 +33,5 @@ for article in headlines_json['articles']:
 
 for title, url in articles.items():
     st.write(f"[{title}]({url})")
-    classify_text = process_text(title)
-    print(classify_text)
+    # classify_text = process_text(title)
+    # print(classify_text)
