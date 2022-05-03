@@ -31,7 +31,12 @@ for article in headlines_json['articles']:
     title = ''.join(article['title'].split('-')[:-1])
     articles[title] = article['url']
 
+clf = load('models/tfidf_svm')
+td = load('models/tfidf_td')
+
 for title, url in articles.items():
-    st.write(f"[{title}]({url})")
-    # classify_text = process_text(title)
-    # print(classify_text)
+    X = td.transform([process_text(title)])
+    prediction = clf.predict(X)[0]
+
+    if prediction == 1:
+        st.write(f"[{title}]({url})")
