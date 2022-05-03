@@ -4,14 +4,20 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
+from joblib import dump
 
 df = pd.read_csv('data/twitter_processed.csv')
 
-tweets = [x for x in df['text']]
-y = [x for x in df['status']]
+# tweets = [x for x in df['text']]
+# y = [x for x in df['status']]
+
+y = df['status']
+X = df['text']
 
 td  = TfidfVectorizer()
-X = td.fit_transform(tweets).toarray()
+X = td.fit_transform(X)
+
+X_df = pd.DataFrame.sparse.from_spmatrix(X)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3)
 
@@ -30,6 +36,7 @@ print(f'======================================================')
 print(f'{classification_report}')
 print(f'======================================================')
 
+dump(clf, 'models/tfidf_nb')
 
 # df = pd.DataFrame(X, columns = td.get_feature_names_out())
 
