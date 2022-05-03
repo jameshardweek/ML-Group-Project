@@ -2,13 +2,22 @@ import streamlit as st
 import requests
 from datetime import date
 import json
+import iso3166
 
 API_KEY = "708ad74a333343d78c544425e5cb85cd"
 DATE = date.today().strftime("%Y-%m-%d")
+country = 'gb'
+
+ip_info = requests.get('http://ipinfo.io/json').content
+ip_info_json = json.loads(ip_info)
+current_country = ip_info_json['country'].lower()
+
+if current_country in iso3166.countries:
+    country = current_country
 
 st.title("Good News Today")
 
-headlines = requests.get(f"https://newsapi.org/v2/top-headlines?country=gb&apiKey={API_KEY}").content
+headlines = requests.get(f"https://newsapi.org/v2/top-headlines?country={country}&apiKey={API_KEY}").content
 headlines_json = json.loads(headlines)
 articles = {}
 
@@ -17,8 +26,6 @@ def process_text(text):
     return ' '.join([x for x in text.split()])
 
 for article in headlines_json['articles']:
-    # headline = article['title'].lower()
-    # headline = ''.join([x for x in headline if x.isalpha() or x == ' '])
     title = ''.join(article['title'].split('-')[:-1])
     articles[title] = article['url']
 
