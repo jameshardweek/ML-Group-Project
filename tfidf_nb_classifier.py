@@ -5,8 +5,10 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 
-tweets = [x for x in pd.read_csv('data/processed.csv')['text']]
-y = [x for x in pd.read_csv('data/processed.csv')['status']]
+df = pd.read_csv('data/twitter_processed.csv')
+
+tweets = [x for x in df['text']]
+y = [x for x in df['status']]
 
 td  = TfidfVectorizer()
 X = td.fit_transform(tweets).toarray()
@@ -29,13 +31,13 @@ print(f'{classification_report}')
 print(f'======================================================')
 
 
-df = pd.DataFrame(X, columns = td.get_feature_names_out())
+# df = pd.DataFrame(X, columns = td.get_feature_names_out())
 
-test_sentence = 'man cured of disease'
-test_status = 1
+# test_sentence = 'man cured of disease'
+# test_status = 1
 
-test_X = td.transform(test_sentence.split(' ')).toarray()
+# test_X = td.transform(test_sentence.split(' ')).toarray()
 
-test_predict = clf.predict(test_X)
+# test_predict = clf.predict(test_X)
 
-score = accuracy_score([test_status], test_predict)
+# score = accuracy_score([test_status], test_predict)
