@@ -46,6 +46,7 @@ print(f'======================================================')
 
 if score > old_score:
     dump(clf, 'models/tfidf_svm')
+# dump(td, 'models/tfidf_td')
 
 # df = pd.DataFrame(X, columns = td.get_feature_names_out())
 
