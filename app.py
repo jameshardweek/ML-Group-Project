@@ -31,8 +31,8 @@ for article in headlines_json['articles']:
     title = ''.join(article['title'].split('-')[:-1])
     articles[title] = article['url']
 
-clf = load('models/tfidf_svm')
-td = load('models/tfidf_td')
+clf = load('models/svm_both')
+td = load('models/td_both')
 
 # st.write([f"{x}" for x in articles.keys()])
 
