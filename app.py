@@ -28,7 +28,7 @@ def process_text(text):
     return ' '.join([x for x in text.split()])
 
 for article in headlines_json['articles']:
-    title = ''.join(article['title'].split('-')[:-1])
+    title = ''.join(article['title'].split(' - ')[:-1])
     articles[title] = article['url']
 
 clf = load('models/svm_both')
